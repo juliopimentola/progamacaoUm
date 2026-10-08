@@ -1,36 +1,50 @@
 package EXwhl;
-
+    
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class w10 {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+
+        ArrayList<String> nomes = new ArrayList<>();
+        ArrayList<Double> notas = new ArrayList<>();
 
         String resposta;
         double soma = 0;
-        int quantidade = 0;
 
         do {
-            System.out.print("Digite o nome do aluno: ");
-            String nome = scanner.nextLine();
+            System.out.print("Nome do aluno: ");
+            String nome = sc.nextLine();
 
-            System.out.print("Digite a nota: ");
-            double nota = scanner.nextDouble();
-            scanner.nextLine();
+            System.out.print("Nota do aluno: ");
+            double nota = sc.nextDouble();
+            sc.nextLine();
+
+            nomes.add(nome);
+            notas.add(nota);
 
             soma += nota;
-            quantidade++;
 
             System.out.print("Deseja cadastrar outro aluno? (S/N): ");
-            resposta = scanner.nextLine();
+            resposta = sc.nextLine();
 
         } while (resposta.equalsIgnoreCase("S"));
 
-        double media = soma / quantidade;
+        System.out.println("\n===== TABELA DE ALUNOS =====");
+        System.out.printf("%-25s %s%n", "NOME", "NOTA");
+        System.out.println("-----------------------------------");
 
-        System.out.println("Média das notas = " + media);
+        for (int i = 0; i < nomes.size(); i++) {
+            System.out.printf("%-25s %.2f%n",
+                    nomes.get(i), notas.get(i));
+        }
 
-        scanner.close();
+        double media = soma / notas.size();
+
+        System.out.println("-----------------------------------");
+        System.out.printf("Média geral da turma: %.2f%n", media);
+
+        sc.close();
     }
-}
